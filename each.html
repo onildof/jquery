@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			.a {
+				border: medium solid green;
+			}
+			.b {
+				border:  medium solid blue;
+			}
+			.c {
+				border:  medium solid red;
+			}
+			.gray {
+				background-color:gray;
+			}
+			.blue {
+				border: medium solid lightblue;
+			}
+			.dashed {
+				border: medium dashed lightblue;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div class="a"><p>div a</p></div>
+			<div class="b"><p>div b</p></div>
+			<div class="c"><p>div c</p></div>
+			<div class="blue" id="one"></div>
+			<div class="blue" id="two"></div>
+			<div class="blue" id="three"></div>
+			<div class="blue" id="four"></div>
+			<div class="blue" id="five"></div>
+		</div>
+		<script src="jquery-3.4.1.js"></script>
+		<script>
+			jQuery.noConflict()
+			jQuery(function ($) {
+				//Demonstração do object method $(selector).each()
+				$("div#container").on("click", function () {
+					$("div#container div").each(function (index, element) {
+						console.log(`${index} ${$(this).prop("id")} ${$(this).prop("class")}`)
+						if (index % 2 == 1) {
+							$(this).toggleClass("gray")
+							$(element).toggleClass("dashed")
+							//this e element são o mesmo DOM object
+							console.log("this === element: " + (this === element))
+						}
+					})
+				})
+				
+				//Demonstração do core method jQuery.each()
+					//array como parâmetro
+				let arr = ["one", "two", "three", "four", "five"]
+				$.each(arr, function (index, element) {
+					$("div#"+element).html("<p>"+index+"</p>")
+				})
+				
+					//objeto como parâmetro
+				let obj = {one: 1, two: 2, three: 3, four: 4, five: 5}
+				$.each(obj, function (key, value) {
+					$("div#"+key).width(value*100)
+				})
+				
+				//array de objetos e $.each() aninhado
+				let jsonobjects = [{red: "#f00"}, {green: "#0f0"}, {blue: "#00f"}]
+				$.each(jsonobjects, function () {
+					$.each(this, function (key, value) {
+						console.log(key + value)
+					})
+				})	
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			div#windowload, div#documentready {
+				float:right;
+				clear:both;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<h1>$(function () {})</h1>
+			<h2>vulgo $(document).ready(function () {})</h2>
+			
+			<p>Uma página não pode ser manipulada seguramente até que o DOM (Document Object Model) esteja carregado.</p>
+			
+			<p>.ready() é um object method que garante que o DOM completo foi carregado.</p>
+			
+			<p>Tipicamente se usa .ready() com uma função anônima como parâmetro. Antigamente se escrevia assim:</p>
+			
+			<p><b>$(document).ready(function () { … })</b></p>
+			
+			<p>Mas desde o jquery 3.0, o objeto dessa função passou a poder ser qualquer coisa (ele simplesmente não importa mais). Por isso que agora prefere-se escrever:</p>
+			
+			<p><b>$(function () { … })</b> (nem o próprio nome do método se escreve mais)</p>
+			
+			<h1>document do DOM</h1>
+			<p>document é um elemento do DOM. Quando você envolve um elemento do DOM em “jquery parentheses”, recebe uma representação jquery daquele elemento DOM, ou seja, um objeto jquery mesmo.</p>
+			<p>.ready(), portanto é um object method do jquery, pois é chamado em um objeto jquery.</p>
+			
+			<h1>$(window).on("load")</h1>
+			
+			<p>O carregamento do DOM não inclui as imagens e outros elementos multimídia (apenas as tags). Se quiser aguardar o carregamento de todo o resto também, use:</p>
+			
+			<p><b>$(window).on(“load”, function () { … })</b></p>
+		</div>
+		<div id="documentready"></div>
+		<div id="windowload"></div>
+		<div>
+			<img src="4kpicture.jpg">
+		</div>
+		<script src="jquery-3.4.1.js"></script>
+		<script>
+			let documentready, windowload
+			
+			$(function () {
+				documentready = $.now()
+				$("div#documentready").html(`<p>document ready @ ${documentready}</p>`)
+			})
+			
+			$(window).on("load", function () {
+				windowload = $.now()
+				$("div#windowload").html(`<p>window load @ ${windowload}</p>`)
+			})
+		</script>
+	</body>
+</html>

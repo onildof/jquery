@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			div.gray {
+				background-color: gray;
+			}
+			
+			div.borders {
+				border: 5px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<h1>jQuery.noConflict() 2/3</h1>
+			<p>A solução do noconflict.html pode ser inconveniente se você já tiver um monte de código jquery pra copiar, que tradicionalmente usa o $ como alias.</p>
+			<p>Neste caso, o recomendado é usar um significado para o $ no escopo local, e outro no escopo global.</p>
+			<p>Para isso, deve-se passar o $ como argumento para o callback da sua chamada jQuery(document).ready</p>
+		</div>
+		<div>
+			<img src="4kpicture.jpg">
+		</div>
+		<script src="prototype.js"></script>
+		<script src="jquery-3.4.1.js"></script>
+		<script>
+			jQuery.noConflict()
+			//o $ neste escopo é do prototype
+		
+			jQuery(function ($) {
+				//o $ neste escopo é do jquery
+				$("#content").addClass("gray")
+			})
+			
+			window.onload = function () {
+				$("content").addClassName("borders")
+			}
+		</script>
+	</body>
+</html>

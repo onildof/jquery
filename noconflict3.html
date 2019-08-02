@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			div.gray {
+				background-color: gray;
+			}
+			
+			div.borders {
+				border: 5px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<h1>jQuery.noConflict() 3/3</h1>
+			<p>Incluir o jquery antes das outras bibliotecas significa que você não poderá chamar o noConflict e não poderá usar o $ para o jQuery jamais. Use a palavra jQuery.</p>
+		</div>
+		<div>
+			<img src="4kpicture.jpg">
+		</div>
+		<script src="jquery-3.4.1.js"></script>
+		<script src="prototype.js"></script>
+		<script>
+			//o $ neste escopo é do prototype
+		
+			jQuery(function ($) {
+				//o $ neste escopo é do jquery
+				$("#content").addClass("gray")
+			})
+			
+			window.onload = function () {
+				$("content").addClassName("borders")
+				jQuery("#content").removeClass("gray")
+			}
+		</script>
+	</body>
+</html>

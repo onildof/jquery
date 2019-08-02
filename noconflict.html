@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			div.gray {
+				background-color: gray;
+			}
+			
+			div.borders {
+				border: 5px solid black;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<h1>jQuery.noConflict() 1/3</h1>
+			<p>O <b>namespace jQuery</b> contém toda a biblioteca jquery, assim como seus objetos globais e plugins.</p>
+			<p>Por padrão, jquery usa <b>$</b> como um alias para o <b>namespace jQuery</b>. Então se você estiver usando outra biblioteca que usa o mesmo alias (várias usam, como é o caso da prototype), tem que fazer alguma coisa para não dar conflito.</p>
+			<p>Quando você põe o jquery em noConflict mode, tem a opção substituir o alias <b>$</b> por outro.</p>
+		</div>
+		<div>
+			<img src="4kpicture.jpg">
+		</div>
+		<script src="prototype.js"></script>
+		<script src="jquery-3.4.1.js"></script>
+		<script>
+			/*
+			 * Acima referenciamos a biblioteca jquery por último, o que nos permite usar o core method noConflict()
+			 *
+			 * Ao chamar esse método, trocamos o alias $ por $j para o jQuery. $ fica apenas para a biblioteca prototype.
+			 *
+			 * window é um objeto do DOM
+			 * onload é um evento do DOM
+			 * Na biblioteca prototype, $ é um alias para document.getElementById
+			 * document é um objeto do DOM
+			 */
+			var $j = jQuery.noConflict()
+
+			$j(function () {
+				$j("#content").addClass("gray")
+			})
+			
+			window.onload = function () {
+				$("content").addClassName("borders") //em prototypejs, buscamos o elemento de id content e lhe adicionamos uma classe css.
+				$j("#content").removeClass("gray")
+			}
+		</script>
+	</body>
+</html>

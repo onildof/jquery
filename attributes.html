@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<style></style>
+	</head>
+	<body>
+		<div id="content">
+			<h1>DOM: diferença entre atributo e propriedade</h1>
+			<h2>Esses conceitos são aproveitados pelo objeto jquery criado a partir do elemento do DOM</h2>
+			<p>Quando você escreve um código fonte HTML, escreve os atributos das tags HTML.</p>
+			<p>Quando o browser parseia o código fonte, a tag é transformada num elemento (AKA um nó) do DOM com propriedades.</p>
+			<p>A tag &lt;input id=&quot;the-input&quot; type=&quot;text&quot; value=&quot;Name:&quot;&gt; tem os atributos id, type e value.</p>
+			<p>O browser parseia esse código e cria um elemento HTMLInputElement, o qual terá dezenas de propriedades: accept, accessKey, align, alt, attributes, autofocus, baseURI, checked, childElementCount, childNodes, children, classList, className, clientHeight, etc.</p>
+			<p>Os atributos da tag vão todos para a propriedade attributes do elemento.</p>
+			<p>Mas além disso o elemento tem propriedades que espelham atributos da tag. Esse espelhamento tem várias nuances:</p>
+			<ul>
+				<li>id é uma propriedade refletida do atributo id. É puramente refletida porque a propriedade lê ou escreve o atributo e não há limitação de valor.</li>
+				<li>type é propriedade refletida do atributo type, mas não puramente porque você é limitado nos valores que pode setar ("text", "checkbox", "select", etc).</li>
+				<li>Em contraste, a propriedade value não reflete o atributo value. Porque o atributo value não contém o valor corrente do input, e sim o valor inicial.</li>
+			</ul>
+			<p>Se o usuário escrever John no input, theInput.value retornará John, enquanto theInput.getAttribute('value') retornará Name:"</p>
+			<h1>.attr()</h1>
+			<p>Obtém um atributo do primeiro objeto do conjunto retornado pelo selector.<br/>
+			Ou modifica o atributo de todos os objetos do conjunto retornado pelo selector.</p>
+			<h1>.prop()</h1>
+			<p>Obtém uma propriedade do primeiro objeto do conjunto retornado pelo selector.<br/>
+			Ou modifica a propriedade de todos os objetos do conjunto retornado pelo selector.</p>
+			<h1>Diferenças entre .attr() ou .prop()</h1>
+			<p>checked, defaultChecked, selected, selectedIndex, defaultSelected, disabled, tagName, nodeName, nodeType e ownerDocument devem ser manipulados apenas com .prop()</p>
+			<p>Passe com o mouse sobre os checkboxes para entender a diferença entre o <b>atributo</b> checked (o estado inicial do checkbox - checked ou undefined para sempre - corresponde ao parâmetro defaultChecked do elemento) e a <b>propriedade</b> checked (o estado atual do checkbox - true ou false - corresponde ao parâmetro checked do elemento.).</p>
+			<div>
+				<form action="#" method="post" name="myform" id="myform">
+					<table>
+						<tr>
+							<td>
+								<input type="checkbox" value="portugu" name="languages" checked/>Portuguese<br/>
+								<input type="checkbox" value="anglais" name="languages"/>Anglais<br/>
+								<input type="checkbox" value="deutsch" name="languages" checked/>Deutsch<br/>
+								<input type="checkbox" value="italian" name="languages"/>Italiano
+							</td>
+						</tr>
+						<tr>
+							<td>Favorite Food:</td>
+							<td>
+								<select name="food" id="food" size="3">
+									<option value="french">French</option>
+									<option value="italia">Italian</option>
+									<option value="japane">Japanese</option>
+									<option value="thaila">Thai</option>
+									<option value="portug">Portuguese</option>
+									<option value="barbec">Barbecue</option>
+									<option value="vegane">Vegan</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>Disliked Foods:</td>
+							<td>
+								<select name="nofood" id="nofood" size="7" multiple="multiple">
+									<option value="french">French</option>
+									<option value="italia">Italian</option>
+									<option value="japane">Japanese</option>
+									<option value="thaila">Thai</option>
+									<option value="portug">Portuguese</option>
+									<option value="barbec">Barbecue</option>
+									<option value="vegane">Vegan</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</form>
+			</div>
+		</div>
+		<script src="jquery-3.4.1.js"></script>
+		<script>
+			$(function() {
+				//Testando propriedades que não existem ou propriedades de elementos que não existem. O retorno é undefined.
+				let a = $("h1").attr("hue")
+				console.log(a)
+				
+				a = $("h1").prop("hue")
+				console.log(a)
+				
+				a = $("h2").attr("hue")
+				console.log(a)
+				
+				a = $("h2").prop("hue")
+				console.log(a)
+				
+				//Comparando attr com prop
+				$("form input:checkbox").hover(
+					function () {
+						console.log($(this).prop("value"))
+						let a = $(this).attr("checked")
+						console.log("$(this).attr(\"checked\"): " + a)
+						console.log("element.defaultChecked: " + this.defaultChecked)
+						a = $(this).prop("checked")
+						console.log("$(this).prop(\"checked\"): " + a)
+						console.log("element.checked: " + this.checked)
+					},
+					function () {
+						console.log("-----------------")
+					}
+				)
+				
+				//Conclui-se do exemplo acima que só prop deve ser usado para mudar o status de um checkbox
+				setTimeout(function () {
+					$("form input:checkbox").eq(2).prop("checked", false)
+					$("form input:checkbox").eq(3).prop("checked", true)
+				}, 1000)
+				
+				//Atributos do checkbox
+				console.log(document.getElementsByName("languages").item(0).getAttributeNames())
+			})
+		</script>
+	</body>
+</html>

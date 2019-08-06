@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<style>
+			#container {
+				width: 960px;
+				margin: 0 auto;
+				background-color: lightblue;
+			}
+			
+			.red {
+				border: 5px solid red;
+			}
+			
+			.teal {
+				border: 5px solid teal;
+			}
+			
+			ul.people {
+				list-style-type: circle;
+			}
+			
+			.times {
+				font-family: "Times New Roman", Times, serif;
+			}
+			
+			.oblique {
+				font-style: oblique;
+			}
+			
+			.thick {
+				font-weight: bold;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<p>A primeira coisa a fazer com o jquery é selecionar elementos. Todos os selectors estão em <a href="https://api.jquery.com/category/selectors/">https://api.jquery.com/category/selectors/</a></p>
+			<div id="one">div de id one</div>
+			<div id="two"	>div de classe red</div>
+			<div id="formdiv">
+				<form action="#" method="post">
+					<table>
+						<tr>
+							<td>First name:</td>
+							<td><input type="text" name="first" id="first"/></td>
+						</tr>
+						<tr>
+							<td>Last name:</td>
+							<td><input type="text" name="last" id="last"/></td>
+						</tr>
+						<tr>
+							<td>Password:</td>
+							<td><input type="password" name="password" id="password"/></td>
+						</tr>
+						<tr>
+							<td>Gender:</td>
+							<td>
+								<input type="radio" value="neutral" name="gender"/>Gender Neutral
+								<input type="radio" value="gender blender" name="gender"/>Gender Blender 
+							</td>
+						</tr>
+						<tr>
+							<td>Politics:</td>
+							<td>
+								<input type="radio" value="0" name="politics"/>Liberal<br/>
+								<input type="radio" value="1" name="politics"/>Conservative<br/>
+								<input type="radio" value="2" name="politics"/>Socialist
+							</td>
+						</tr>
+						<tr>
+							<td>Languages:</td>
+							<td>
+								<input type="checkbox" value="portugu" name="languages"/>Portuguese
+								<input type="checkbox" value="anglais" name="languages"/>English
+								<input type="checkbox" value="deutsch" name="languages"/>Deutsch
+							</td>
+						</tr>
+						<tr>
+							<td>Metal:</td>
+							<td>
+								<input type="checkbox" value="black" name="metal"/>Black Metal<br/>
+								<input type="checkbox" value="death" name="metal"/>Death Metal<br/>
+								<input type="checkbox" value="heavy" name="metal"/>Heavy Metal
+							</td>
+						</tr>
+						<tr>
+							<td>Color:</td>
+							<td><input type="color" name="color" id="color"/></td>
+						</tr>
+						<tr>
+							<td>Birthday:</td>
+							<td><input type="date" name="dob" id="dob"/></td>
+						</tr>
+						<tr>
+							<td>Appointment:</td>
+							<td><input type="time" name="appointment" id="appointment"/></td>
+						</tr>
+						<tr>
+							<td>Email:</td>
+							<td><input type="email" name="email" id="email"/></td>
+						</tr>
+						<tr>
+							<td>Phone:</td>
+							<td><input type="tel" name="phone" id="phone"/></td>
+						</tr>
+						<tr>
+							<td>Access Level:</td>
+							<td><input type="number" name="level" id="level" min="0" max="5"/></td>
+						</tr>
+						<tr>
+							<td>Favorite Food:</td>
+							<td>
+								<select name="food" id="food" size="3">
+									<option value="french">French</option>
+									<option value="italia">Italian</option>
+									<option value="japane">Japanese</option>
+									<option value="thaila">Thai</option>
+									<option value="portug">Portuguese</option>
+									<option value="barbec">Barbecue</option>
+									<option value="vegane">Vegan</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>Disliked Foods:</td>
+							<td>
+								<select name="nofood" id="nofood" size="7" multiple="multiple">
+									<option value="french">French</option>
+									<option value="italia">Italian</option>
+									<option value="japane">Japanese</option>
+									<option value="thaila">Thai</option>
+									<option value="portug">Portuguese</option>
+									<option value="barbec">Barbecue</option>
+									<option value="vegane">Vegan</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td></td>
+							<td><input type="submit" value="Send Info"></td>
+						</tr>
+					</table>
+				</form>
+			</div>
+			<div id="four">
+				<h2 class="times">Ordered lists:</h2>
+				<ol>
+					<li>Recife</li>
+					<li>Araçoiaba</li>
+					<li>Riacho das Almas</li>
+				</ol>
+				<h2>Unordered lists:</h2>
+				<ul class="people">
+					<li>Chris Evans</li>
+					<li>Chris Pratt</li>
+					<li>Chris Hemsworth</li>
+				</ul>
+				<ul class="recipients">
+					<li>cup</li>
+					<li>glass</li>
+					<li>bucket</li>
+				</ul>
+			</div>
+		</div>
+		<script src="jquery-3.4.1.js"></script>
+		<script>
+			$(function () {
+				setTimeout(function () {
+					$("#container").addClass("red")
+				}, 1000)
+				
+				setTimeout(function () {
+					$(".red").removeClass("red")
+				}, 2000)
+				
+				setTimeout(function () {
+					$("input[name='first']").addClass("red") //tag input cujo atributo name é first_name
+				}, 3000)
+				
+				setTimeout(function () {
+					$("#four ul.people li").addClass("red") //li dentro de tag ul de classe people dentro de elemento de id contents
+				}, 4000)
+				
+				setTimeout(function () {
+					$("div#four, ul.recipients").addClass("red") //pode-se selecionar elementos com critérios separados por vírgulas
+				}, 5000)
+				
+				/*Pseudo-Selectors são uma gambiarra! (nem olhe)
+				 *
+				 *Para saber se uma seleção retornou alguma coisa, use a propriedade length:
+				 */
+				
+				setTimeout(function () {
+					if ($(".red").length) {
+						$(".red").removeClass("red")
+					}
+					
+					if (!$(".teal").length) {
+						$("div").addClass("teal")
+					}
+				}, 6000)
+				
+				/* Seletores não cacheam, então se você chamar $("div") dez vezes, será feita a busca dez vezes.
+				 * Melhor salvar numa variável se for precisar desses elementos novamente:
+				 */
+				let divs = $("div")
+				console.log(divs.length)
+
+				/* Se o DOM mudar, as seleções que você fez antes não vão automaticamente mudar.
+				 * Elas são apenas uma foto do momento em que foram chamadas.
+				 * Então ao mudar a estrutura da página você precisará atualizá-las manualmente.
+				 */
+				$("div#four").clone().appendTo("div#four")
+				divs = $("div")
+				console.log(divs.length)
+				
+				/* Uma seleção pode retornar muitos resultados. jQuery oferece formas de filtrá-los:
+				 */
+				setTimeout(function () {
+					$("div").has("p").removeClass("teal").addClass("red")
+					$("h2").not(".times").addClass("oblique")
+				}, 7000)
+				
+				setTimeout(function () {
+					$("h2").filter(".oblique").addClass("thick")
+					$("ul li").first().addClass("thick")
+					$("ul li").eq(4).addClass("oblique") //o quinto elemento
+				}, 8000)
+				
+				/*
+				 *	Pseudo-selectors úteis para forms.
+
+					$(“form :checked”) //funciona para radio, checkbox e select element
+					$(“form :selected”) //funciona apenas para select element
+					$(“form”).filter(“:selected”) //melhor desempenho
+					$(“form :disabled”) //funciona, mas a performance é melhor se usar o formato abaixo:
+					$(“form”).filter(“:disabled”)
+					$(“form”).filter(“:enabled”) //para elementos que não têm o atributo disabled
+					$(“form :input”) //seleciona os elementos input, textarea, select e button
+					
+					Os outros pseudo-selectors para formulários estão em https://api.jquery.com/category/selectors/form-selectors/
+				*/
+			})
+		</script>
+	</body>
+</html>

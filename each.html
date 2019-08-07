@@ -24,6 +24,19 @@
 		</style>
 	</head>
 	<body>
+		<div>
+A maioria dos métodos jquery são chamados em objetos jquery.
+
+$(“h1”).remove()
+
+Esses métodos são do $.fn namespace, também conhecido como jquery prototype. E são melhor conhecidos como jquery object methods. Eles implicitamente recebem o objeto selecionado (this) como parâmetro e automaticamente o retornam também (de que forma?).
+
+Porém existem métodos que não agem em uma seleção. Diz-se que são métodos do jquery namespace ($ namespace). E são conhecidos como jquery core methods. São utilitários e não recebem parâmetros implicitamente. Seu retorno varia.
+
+Existem poucos casos em que o nome de um método object e um método core têm o mesmo nome.
+
+.each() e $.each() (método objeto e método core, respectivamente)			
+		</div>
 		<div id="container">
 			<div class="a"><p>div a</p></div>
 			<div class="b"><p>div b</p></div>

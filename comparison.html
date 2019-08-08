@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<style>
+			body {
+				margin: 0px;
+			}
+			
+			#container {
+				width: 960px;
+				margin: 0 auto;
+			}
+			
+			.blue {
+				border: 3px solid steelblue;
+			}
+			
+			.aqua {
+				border: 3px solid aquamarine;
+			}
+			
+			.green {
+				border: 3px solid limegreen;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div>
+				<h1>Comparação</h1>
+				<h2>É impossível comparar dois objetos jQuery</h2>
+				<p>Todos os objeto jQuery são únicos. Mesmo que tenham sido criados do mesmo elemento DOM.</p>
+				<p>let a = $(“#logo”)</p>
+				<p>let b = $(“#logo”)</p>
+				<p>console.log(a === b) //false</p>
+				<h2>O que fazer se a comparação for necessária?</h2>
+				<p>Transforme os objetos jquery de volta nos respectivos elementos DOM (via método .get(index)) e em seguida os compare.</p>
+				<p>let c = a.get(0)</p>
+				<p>let d = b.get(0)</p>
+				<p>console.log(c === d) //true</p>
+			</div>
+			<div id="stuff">
+				<div><p>0</p></div>
+				<div><p>1</p></div>
+				<div><p>2</p></div>
+				<div><p>3</p></div>
+				<div><p>4</p></div>
+				<div><p>5</p></div>
+				<div><p>6</p></div>
+			</div>
+		</div>
+		<script src="jquery-3.4.1.js"></script>
+		<script>
+			
+		</script>
+	</body>
+</html>

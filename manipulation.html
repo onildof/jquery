@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<style>
+			body {
+				margin:0px;
+			}
+			
+			#container {
+				width: 960px;
+				margin: 0 auto;
+			}
+			
+			.red {
+				border: 3px solid red;
+			}
+			
+			.orange {
+				border: 3px solid orange;
+			}
+			
+			.gold {
+				border: 3px solid gold;
+			}
+			
+			.blue {
+				border: 3px solid steelblue;
+			}
+			
+			.aqua {
+				border: 3px solid aquamarine;
+			}
+			
+			.green {
+				border: 3px solid limegreen;
+			}
+			
+			.purple {
+				border: 3px solid purple;
+			}
+			
+			.spacer {
+				height:50px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+			<div>
+				<h1>Manipulação</h1>
+				<p>Já selecionamos e navegamos pelos elementos. O terceiro passo é manipulá-los.</p>
+				<p>A documentação completa sobre manipulação está em <a href="https://api.jquery.com/category/manipulation/">https://api.jquery.com/category/manipulation/</a></p>
+				<p>Para remover um elemento da página, assim como seus dados e eventos associados, use .remove().</p>
+				<p>Para remover sem excluir os eventos e dados, use .detach().</p>
+				<p>Ambos retornam uma referência ao elemento.</p>
+				<p>Se quiser só esvaziar o conteúdo do elemento, sem removê-lo, use .empty().</p>
+				<p><strong>Ainda não sei ilustrar essa remoção ou não de eventos e dados.</strong></p>
+				<p>O método de seleção $() também pode ser usado para criar elementos.</p>
+			</div>
+			<div id="stuff">
+				<div><p>0</p></div>
+				<div><p>1</p></div>
+				<div><p>2</p><button name="removeMe" id="removeMe" type="button">remove me</button></div>
+				<div><p>3</p><button name="emptyMe" id="emptyMe" type="button">empty me</button></div>
+				<div><p>4</p></div>
+				<div><p>5</p></div>
+				<div><p>6</p></div>
+			</div>
+			<div class="spacer"><h2>.insertAfter(target) .after(content) e .before(content)</h2></div>
+			<div>
+				<button name="insertAfter" id="insertAfter" type="button">insertAfter(target)</button>
+				<button name="after" id="after" type="button">after(content)</button>
+				<button name="insertAfter2" id="insertAfter2" type="button">insertAfter(target) também move</button>
+				<button name="after2" id="after2" type="button">after(content) também move</button>
+				<button name="before" id="before" type="button">before(content)</button>
+			</div>
+			<div id="after">
+				<div id="0"><p>0</p></div>
+				<div id="1"><p>1</p></div>
+				<div id="2"><p>2</p></div>
+			</div>
+		</div>
+
+		<script src="jquery-3.4.1.js"></script>
+		<script>
+			let colors = ["red", "orange", "gold", "blue", "aqua", "green", "purple"]
+			let colorIndex = 0
+			
+			function cycleColors() {
+				return colors[colorIndex++%colors.length]
+			}
+			
+			$(function () {
+				$("#stuff div").each(function (index, element) {
+					$(element).addClass(cycleColors())
+				})
+				
+				let divs = $("#stuff div") //7 elementos nesse objeto
+				let stuffDiv = divs.parent("#stuff")
+				
+				setInterval(function() {
+					stuffDiv.removeClass()
+					stuffDiv.addClass(cycleColors())
+				}, 100)
+				
+				//appendTo()
+				setTimeout(function () {
+					divs.eq(2).appendTo(divs.eq(1)).appendTo(divs.eq(0))
+				}, 1000)
+				
+				//append()
+				setTimeout(function () {
+					divs.eq(3).append(divs.eq(4)).append(divs.eq(5))
+				}, 2000)
+				
+				//clone()
+				setTimeout(function () {
+					divs.parent("#stuff").append(divs.eq(6).clone())
+				}, 3000)
+				
+				//remove()
+				setTimeout(function () {
+					//divs.parent("#stuff").empty()
+				}, 4000)
+				
+				
+				$("button#removeMe").on("click", function (event) {
+					$(this).parent("div").remove()
+				})
+				
+				$("button#emptyMe").on("click", function (event) {
+					$(this).parent("div").empty()
+				})
+				
+				//criando elementos com o $()
+				let newDiv = $("<div class='"+cycleColors()+"'><p>Div criado pelo $()</p></div>")
+				stuffDiv.append(newDiv)
+				
+				//também é possível criar um elemento com o $() usando o parâmetro attributes
+				let newLink = $("<a/>", {
+					html:"Palavras Reservadas [Link criado pelo $() usando o parâmetro attributes]",
+					"class":cycleColors(), //a chave class é quotada porque é uma palavra reservada
+					href:"https://mathiasbynens.be/notes/reserved-keywords"
+				})
+				
+				newDiv.append(newLink)
+				
+				//insertAfter e after
+				$("#after div").each(function (index, element) {
+					$(element).addClass(cycleColors())
+				})
+				
+				$("button#after").on("click", function (event) {
+					$("div#after").children().after("<div><p>after</p></div>")
+				})
+				
+				$("button#after2").on("click", function (event) {
+					$("div#after div#0").after($("div#after div#1")) //se quiser um selector no parâmetro do after vai ter que usar o $()
+				})
+				
+				$("button#insertAfter").on("click", function (event) {
+					$("<div><p>insertAfter</p></div>").insertAfter("div#after div") //o parâmetro do insertAfter não cria nada, só seleciona
+				})
+				
+				$("button#insertAfter2").on("click", function (event) {
+					$("div#after div#0").insertAfter("div#after div#1")
+				})
+				
+				$("button#before").on("click", function (event) {
+					$("div#after div").first().before($("div#after div").last())
+				})
+			})
+		</script>
+	</body>
+</html>

@@ -34,6 +34,11 @@
 			<h1>Diferenças entre .attr() ou .prop()</h1>
 			<p>checked, defaultChecked, selected, selectedIndex, defaultSelected, disabled, tagName, nodeName, nodeType e ownerDocument devem ser manipulados apenas com .prop()</p>
 			<p>Passe com o mouse sobre os checkboxes para entender a diferença entre o <b>atributo</b> checked (o estado inicial do checkbox - checked ou undefined para sempre - corresponde ao parâmetro defaultChecked do elemento) e a <b>propriedade</b> checked (o estado atual do checkbox - true ou false - corresponde ao parâmetro checked do elemento.).</p>
+			<h1>Obtendo elemento DOM a partir de um objeto jQuery</h1>
+			<p>Ver <a href="comparison.html">comparação</a>.</p>
+			<p>Quando você confunde um objeto jquery com um objeto DOM, os seguintes erros surgem:</p>
+			<p>"event.target.closest is not a function"' e "TypeError: Object [object Object] has no method 'setAttribute'"</p>
+			<p>Para evitar isso, alguns desenvolvedores gostam de por um $ no nome das variáveis que guardam objetos jquery. Não tem efeito nenhum, é só uma conveniência.</p>
 			<div>
 				<form action="#" method="post" name="myform" id="myform">
 					<table>

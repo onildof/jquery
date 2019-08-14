@@ -74,6 +74,7 @@
 				<button name="insertAfter2" id="insertAfter2" type="button">insertAfter(target) também move</button>
 				<button name="after2" id="after2" type="button">after(content) também move</button>
 				<button name="before" id="before" type="button">before(content)</button>
+				<button name="insertBefore" id="insertBefore" type="button">insertBefore(target)</button>
 			</div>
 			<div id="after">
 				<div id="0"><p>0</p></div>
@@ -169,6 +170,10 @@
 				
 				$("button#before").on("click", function (event) {
 					$("div#after div").first().before($("div#after div").last())
+				})
+				
+				$("button#insertBefore").on("click", function (event) {
+					$("<div><p>insertBefore</p></div>").insertBefore("div#after div") //o parâmetro do insertBefore não cria nada, só seleciona
 				})
 			})
 		</script>

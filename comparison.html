@@ -39,6 +39,12 @@
 				<p>let c = a.get(0)</p>
 				<p>let d = b.get(0)</p>
 				<p>console.log(c === d) //true</p>
+				<p>Um get com índice negativo começa a contar do último elemento DOM.</p>
+				<p>console.log( $( "li" ).get( -1 ) );</p>				
+				<p>O objeto jQuery é array like. Se você usar um subscrito (?) array, ele retorna os elementos DOM também.</p>
+				<p>let e = a[0]</p>
+				<p>let f = b[0]</p>
+				<p>console.log(e === f) //true</p>
 			</div>
 			<div id="stuff">
 				<div><p>0</p></div>
